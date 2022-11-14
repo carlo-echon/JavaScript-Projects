@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Lab 2: JService Arrays</title>
+  </head>
+  <body>
+    <script>
+        let historyCategory;
+        let secondsCategory;
+        let foreigncuisineCategory;
+        let composersCategory;
+        let anniversaryCategory;
+        const History100 = [];
+        const History200 = [];
+        const History300 = [];
+        const History400 = [];
+        const History500 = [];
+        const Seconds100 = [];
+        const Seconds200 = [];
+        const Seconds300 = [];
+        const Seconds400 = [];
+        const Seconds500 = [];
+        const Cuisine100 = [];
+        const Cuisine200 = [];
+        const Cuisine300 = [];
+        const Cuisine400 = [];
+        const Cuisine500 = [];
+        const Composer100 = [];
+        const Composer200 = [];
+        const Composer300 = [];
+        const Composer400 = [];
+        const Composer500 = [];
+        const Anniversary100 = [];
+        const Anniversary200 = [];
+        const Anniversary300 = [];
+        const Anniversary400 = [];
+        const Anniversary500 = [];
+        
+        
+
+        fetch("http://jservice.io/api/category?id=18593%22")
+            .then(
+                function(response){
+                    if(response.status !==200){
+                        console.log('Problem in History Category' + response.status);
+                        return;
+                    }
+                response.json().then(function(data){
+                    historyCategory = data;
+                    for (let index = 0; index < historyCategory.clues.length; index++) {
+                        if(historyCategory.clues[index].value == 100){
+                            History100.push(historyCategory.clues[index]);
+                            
+                        }
+                        else if(historyCategory.clues[index].value == 200){
+                            History200.push(historyCategory.clues[index]);
+                            
+                        }
+                        else if(historyCategory.clues[index].value == 300){
+                            History300.push(historyCategory.clues[index]);
+                            
+                        }
+                        else if(historyCategory.clues[index].value == 400){
+                            History400.push(historyCategory.clues[index]);
+                
+                        }
+                        else if(historyCategory.clues[index].value == 500){
+                            History500.push(historyCategory.clues[index]);
+                            
+                        }
+                     
+                    }
+                    
+                })  
+            }  
+                )
+            .catch(function(err){
+                console.log('Fetch Error:-S', err);
+            })
+
+            fetch("http://jservice.io/api/category?id=10315")
+            .then(
+                function(response){
+                    if(response.status !==200){
+                        console.log("Problem in I'll have seconds Category" + response.status);
+                        return;
+                    }
+                response.json().then(function(data){
+                    secondsCategory = data;
+                    for (let index = 0; index < secondsCategory.clues.length; index++) {
+                        if(secondsCategory.clues[index].value == 100){
+                            Seconds100.push(secondsCategory.clues[index]);
+                            
+                        }
+                        else if(secondsCategory.clues[index].value == 200){
+                            Seconds200.push(secondsCategory.clues[index]);
+                           
+                        }
+                        else if(secondsCategory.clues[index].value == 300){
+                            Seconds300.push(secondsCategory.clues[index]);
+                            
+                        }
+                        else if(secondsCategory.clues[index].value == 400){
+                            Seconds400.push(secondsCategory.clues[index]);
+                            
+                        }
+                        else if(secondsCategory.clues[index].value == 500){
+                            Seconds500.push(secondsCategory.clues[index]);
+                
+                        }
+                        
+                    }
+                    
+                })  
+            }  
+                )
+            .catch(function(err){
+                console.log('Fetch Error:-S', err);
+            })
+
+            fetch("http://jservice.io/api/category?id=46")
+            .then(
+                function(response){
+                    if(response.status !==200){
+                        console.log('Problem in Foreign Cuisine Category' + response.status);
+                        return;
+                    }
+                response.json().then(function(data){
+                    foreigncuisineCategory = data;
+                    for (let index = 0; index < foreigncuisineCategory.clues.length; index++) {
+                        if(foreigncuisineCategory.clues[index].value == 100){
+                            Cuisine100.push(foreigncuisineCategory.clues[index]);
+                        }
+                        else if(foreigncuisineCategory.clues[index].value == 200){
+                            Cuisine200.push(foreigncuisineCategory.clues[index]);
+                        }
+                        else if(foreigncuisineCategory.clues[index].value == 300){
+                            Cuisine300.push(foreigncuisineCategory.clues[index]);
+                        }
+                        else if(foreigncuisineCategory.clues[index].value == 400){
+                            Cuisine400.push(foreigncuisineCategory.clues[index]);
+                        }
+                        else if(foreigncuisineCategory.clues[index].value == 500){
+                            Cuisine500.push(foreigncuisineCategory.clues[index]);
+                        }
+                        
+                    }
+                    
+                })  
+            }  
+                )
+            .catch(function(err){
+                console.log('Fetch Error:-S', err);
+            })
+
+            fetch("http://jservice.io/api/category?id=21")
+            .then(
+                function(response){
+                    if(response.status !==200){
+                        console.log('Problem in Composers Category' + response.status);
+                        return;
+                    }
+                response.json().then(function(data){
+                    composersCategory = data;
+                    for (let index = 0; index < composersCategory.clues.length; index++) {
+                        if(composersCategory.clues[index].value == 100){
+                            Composer100.push(composersCategory.clues[index]);
+                        }
+                        else if(composersCategory.clues[index].value == 200){
+                            Composer200.push(composersCategory.clues[index]);
+                        }
+                        else if(composersCategory.clues[index].value == 300){
+                            Composer300.push(composersCategory.clues[index]);
+                        }
+                        else if(composersCategory.clues[index].value == 400){
+                            Composer400.push(composersCategory.clues[index]);
+                        }
+                        else if(composersCategory.clues[index].value == 500){
+                            Composer500.push(composersCategory.clues[index]);
+                        }
+                        
+                    }
+                    
+                   
+                })  
+            }  
+                )
+            .catch(function(err){
+                console.log('Fetch Error:-S', err);
+            })
+
+            fetch("http://jservice.io/api/category?id=20")
+            .then(
+                function(response){
+                    if(response.status !==200){
+                        console.log('Problem in 50th Anniversary Category' + response.status);
+                        return;
+                    }
+                response.json().then(function(data){
+                    anniversaryCategory = data;
+                    for (let index = 0; index < anniversaryCategory.clues.length; index++) {
+                        if(anniversaryCategory.clues[index].value == 100){
+                            Anniversary100.push(anniversaryCategory.clues[index]);
+                        }
+                        else if(anniversaryCategory.clues[index].value == 200){
+                            Anniversary200.push(anniversaryCategory.clues[index]);
+                        }
+                        else if(anniversaryCategory.clues[index].value == 300){
+                            Anniversary300.push(anniversaryCategory.clues[index]);
+                        }
+                        else if(anniversaryCategory.clues[index].value == 400){
+                            Anniversary400.push(anniversaryCategory.clues[index]);
+                        }
+                        else if(anniversaryCategory.clues[index].value == 500){
+                            Anniversary500.push(anniversaryCategory.clues[index]);
+                        }
+                        
+                    }
+                    console.group("History");
+                    console.log(History100);
+                    console.log(History200);
+                    console.log(History300);
+                    console.log(History400);
+                    console.log(History500);
+                    console.groupEnd();
+                    console.group("Seconds");
+                    console.log(Seconds100);
+                    console.log(Seconds200);
+                    console.log(Seconds300);
+                    console.log(Seconds400);
+                    console.log(Seconds500);
+                    console.groupEnd();
+                    console.group("Cuisine");
+                    console.log(Cuisine100);
+                    console.log(Cuisine200);
+                    console.log(Cuisine300);
+                    console.log(Cuisine400);
+                    console.log(Cuisine500);
+                    console.groupEnd();
+                    console.group("Composer");
+                    console.log(Composer100);
+                    console.log(Composer200);
+                    console.log(Composer300);
+                    console.log(Composer400);
+                    console.log(Composer500);
+                    console.groupEnd();
+                    console.group("Anniversary");
+                    console.log(Anniversary100);
+                    console.log(Anniversary200);
+                    console.log(Anniversary300);
+                    console.log(Anniversary400);
+                    console.log(Anniversary500);
+                    console.groupEnd();
+                    console.group("By Value");
+                    const Val100 = History100.concat(Seconds100,Cuisine100,Composer100,Anniversary100);
+                    const Val200 = History200.concat(Seconds200,Cuisine200,Composer200,Anniversary200);
+                    const Val300 = History300.concat(Seconds300,Cuisine300,Composer300,Anniversary300);
+                    const Val400 = History400.concat(Seconds400,Cuisine400,Composer400,Anniversary400);
+                    const Val500 = History500.concat(Seconds500,Cuisine500,Composer500,Anniversary500);
+                    console.log(Val100);
+                    console.log(Val200);
+                    console.log(Val300);
+                    console.log(Val400);
+                    console.log(Val500);
+                    console.groupEnd
+                    
+                })  
+            }  
+                )
+            .catch(function(err){
+                console.log('Fetch Error:-S', err);
+            })
+           
+            
+           
+
+    </script>
+  </body>
+</html>

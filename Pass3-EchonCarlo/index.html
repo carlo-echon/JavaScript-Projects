@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Lab 1: The Guesser</title>
+    <link rel="stylesheet" type="text/css" href="styles.css"/>
+  </head>
+  <body>
+        <h2>Lab 1: The Guesser!</h2>
+        <p class="score">Score: <span id="score-count">0</span></p>
+
+    <div class="guessing-game-grid">
+        <div class><button id = "history" class="btn">10</button></div>
+        <div class><button id = "history1" class="btn">20</button></div>
+        <div class><button id = "history2" class="btn">30</button></div>
+        <div class><button id = "history3" class="btn">40</button></div>
+        <div class><button id = "history4" class="btn">50</button></div>
+        <div class><button id = "art" class="btn">10</button></div>
+        <div class><button id = "art1" class="btn">20</button></div>
+        <div class><button id = "art2" class="btn">30</button></div>
+        <div class><button id = "art3" class="btn">40</button></div>
+        <div class><button id = "art4" class="btn">50</button></div>
+        <div class><button id = "authors" class="btn">10</button></div>
+        <div class><button id = "authors1" class="btn">20</button></div>
+        <div class><button id = "authors2" class="btn">30</button></div>
+        <div class><button id = "authors3" class="btn">40</button></div>
+        <div class><button id = "authors4" class="btn">50</button></div>
+    </div>
+    <div class="outcome">
+        <p id="result"></p>
+    </div>
+     <div class="question-card">
+            <p class="question"></p>
+            <input id="answer" type="text"/><br>
+            <button id="submit" class="btn">Submit</button>
+        </div>
+    <script>
+        const scoreText = document.getElementById("score-count");
+        const historyQuestion = document.getElementById("history");
+        const historyQuestion1 = document.getElementById("history1");
+        const historyQuestion2 = document.getElementById("history2");
+        const historyQuestion3 = document.getElementById("history3");
+        const historyQuestion4 = document.getElementById("history4");
+        const artQuestion = document.getElementById("art");
+        const artQuestion1 = document.getElementById("art1");
+        const artQuestion2 = document.getElementById("art2");
+        const artQuestion3 = document.getElementById("art3");
+        const artQuestion4 = document.getElementById("art4");
+        const authorQuestion = document.getElementById("authors");
+        const authorQuestion1 = document.getElementById("authors1");
+        const authorQuestion2 = document.getElementById("authors2");
+        const authorQuestion3 = document.getElementById("authors3");
+        const authorQuestion4 = document.getElementById("authors4");
+        const questions = document.querySelector(".question");
+        const questionsCard = document.querySelector(".question-card");
+        const submitAnswer = document.getElementById("submit");
+        const answerForCurrClue = document.getElementById("answer");
+        const results = document.getElementById("result");
+        const outcomebox = document.querySelector(".outcome");
+        const categoryGrid = document.querySelector(".guessing-game-grid")
+        let currentClue;
+        let currentPointValue;
+        let currentScore = 0;
+        let setHistoryQ;
+        let setArtQ;
+        let setAuthorQ;
+
+        historyQuestion.addEventListener('click', histQ);
+        historyQuestion1.addEventListener('click', histQ1);
+        historyQuestion2.addEventListener('click', histQ2);
+        historyQuestion3.addEventListener('click', histQ3);
+        historyQuestion4.addEventListener('click', histQ4);
+        artQuestion.addEventListener('click', artQ);
+        artQuestion1.addEventListener('click', artQ1);
+        artQuestion2.addEventListener('click', artQ2);
+        artQuestion3.addEventListener('click', artQ3);
+        artQuestion4.addEventListener('click', artQ4);
+        authorQuestion.addEventListener('click', authorQ);
+        authorQuestion1.addEventListener('click', authorQ1);
+        authorQuestion2.addEventListener('click', authorQ2);
+        authorQuestion3.addEventListener('click', authorQ3);
+        authorQuestion4.addEventListener('click', authorQ4);
+        submitAnswer.addEventListener('click', checkAnswer);
+        answerForCurrClue.addEventListener('keypress', function(event){ 
+            if (event.key === "Enter"){
+                event.preventDefault();
+                document.getElementById("submit").click();
+            }
+        });
+        fetch("http://jservice.io/api/category?id=18593%22")
+            .then(
+                function(response){
+                    if(response.status !==200){
+                        console.log('Problem in History Question' + response.status);
+                        return;
+                    }
+                response.json().then(function(data){
+                    console.log(data);
+                    setHistoryQ = data;
+                })  
+            }  
+                )
+            .catch(function(err){
+                console.log('Fetch Error:-S', err)
+            })
+        fetch("http://jservice.io/api/category?id=14758")
+            .then(
+                function(response){
+                    if(response.status !==200){
+                        console.log('Problem in Author Question' + response.status);
+                        return;
+                    }
+                response.json().then(function(data){
+                    console.log(data);
+                    setAuthorQ = data;
+                })  
+            }  
+                )
+            .catch(function(err){
+                console.log('Fetch Error:-S', err)
+            })    
+        fetch("http://jservice.io/api/category?id=9677")
+            .then(
+                function(response){
+                    if(response.status !==200){
+                        console.log('Problem in Art Question' + response.status);
+                        return;
+                    }
+                response.json().then(function(data){
+                    console.log(data);
+                    setArtQ = data;
+                })  
+            }  
+                )
+            .catch(function(err){
+                console.log('Fetch Error:-S', err)
+            })   
+        function histQ(){
+            currentClue = setHistoryQ.clues[0];
+            console.log(currentClue);
+            answer = currentClue.answer
+            currentPointValue = 10
+            questions.textContent = currentClue.question
+            questionsCard.style.display="block";
+            outcomebox.style.display = "none";
+            categoryGrid.style.display="none";
+            historyQuestion.style.visibility="hidden";
+        }
+        function histQ1(){
+            currentClue = setHistoryQ.clues[1];
+            console.log(currentClue);
+            answer = currentClue.answer
+            currentPointValue = 20
+            questions.textContent = currentClue.question
+            questionsCard.style.display="block"
+            outcomebox.style.display = "none";
+            categoryGrid.style.display="none";
+            historyQuestion1.style.visibility="hidden";
+        }
+        function histQ2(){
+            currentClue = setHistoryQ.clues[2];
+            console.log(currentClue);
+            answer = currentClue.answer
+            currentPointValue = 30
+            questions.textContent = currentClue.question
+            questionsCard.style.display="block"
+            outcomebox.style.display = "none";
+            categoryGrid.style.display="none";
+            historyQuestion2.style.visibility="hidden";
+        }
+        function histQ3(){
+            currentClue = setHistoryQ.clues[3];
+            console.log(currentClue);
+            answer = currentClue.answer
+            currentPointValue = 40
+            questions.textContent = currentClue.question
+            questionsCard.style.display="block"
+            outcomebox.style.display = "none";
+            categoryGrid.style.display="none";
+            historyQuestion3.style.visibility="hidden";
+        }
+        function histQ4(){
+            currentClue = setHistoryQ.clues[4];
+            console.log(currentClue);
+            answer = currentClue.answer
+            currentPointValue = 50
+            questions.textContent = currentClue.question
+            questionsCard.style.display="block"
+            outcomebox.style.display = "none";
+            categoryGrid.style.display="none";
+            historyQuestion4.style.visibility="hidden";
+        }
+
+        function artQ(){
+            currentClue = setArtQ.clues[0];
+            console.log(currentClue);
+            answer = currentClue.answer
+            currentPointValue = 10
+            questions.textContent = currentClue.question
+            questionsCard.style.display="block";
+            outcomebox.style.display = "none";
+            categoryGrid.style.display="none";
+            artQuestion.style.visibility="hidden";
+        }
+        function artQ1(){
+            currentClue = setArtQ.clues[1];
+            console.log(currentClue);
+            answer = currentClue.answer
+            currentPointValue = 20
+            questions.textContent = currentClue.question
+            questionsCard.style.display="block"
+            outcomebox.style.display = "none";
+            categoryGrid.style.display="none";
+            artQuestion1.style.visibility="hidden";
+        }
+        function artQ2(){
+            currentClue = setArtQ.clues[2];
+            console.log(currentClue);
+            answer = currentClue.answer
+            currentPointValue = 30
+            questions.textContent = currentClue.question
+            questionsCard.style.display="block"
+            outcomebox.style.display = "none";
+            categoryGrid.style.display="none";
+            artQuestion2.style.visibility="hidden";
+        }
+        function artQ3(){
+            currentClue = setArtQ.clues[3];
+            console.log(currentClue);
+            answer = currentClue.answer
+            currentPointValue = 40
+            questions.textContent = currentClue.question
+            questionsCard.style.display="block"
+            outcomebox.style.display = "none";
+            categoryGrid.style.display="none";
+            artQuestion3.style.visibility="hidden";
+        }
+        function artQ4(){
+            currentClue = setArtQ.clues[4];
+            console.log(currentClue);
+            answer = currentClue.answer
+            currentPointValue = 50
+            questions.textContent = currentClue.question
+            questionsCard.style.display="block"
+            outcomebox.style.display = "none";
+            categoryGrid.style.display="none";
+            artQuestion4.style.visibility="hidden";
+        }
+
+        function authorQ(){
+            currentClue = setAuthorQ.clues[0];
+            console.log(currentClue);
+            answer = currentClue.answer
+            currentPointValue = 10
+            questions.textContent = currentClue.question
+            questionsCard.style.display="block";
+            outcomebox.style.display = "none";
+            categoryGrid.style.display="none";
+            authorQuestion.style.visibility="hidden";
+        }
+        function authorQ1(){
+            currentClue = setAuthorQ.clues[1];
+            console.log(currentClue);
+            answer = currentClue.answer
+            currentPointValue = 20
+            questions.textContent = currentClue.question
+            questionsCard.style.display="block"
+            outcomebox.style.display = "none";
+            categoryGrid.style.display="none";
+            authorQuestion1.style.visibility="hidden";
+        }
+        function authorQ2(){
+            currentClue = setAuthorQ.clues[2];
+            console.log(currentClue);
+            answer = currentClue.answer
+            currentPointValue = 30
+            questions.textContent = currentClue.question
+            questionsCard.style.display="block"
+            outcomebox.style.display = "none";
+            categoryGrid.style.display="none";
+            authorQuestion2.style.visibility="hidden";
+        }
+        function authorQ3(){
+            currentClue = setAuthorQ.clues[3];
+            console.log(currentClue);
+            answer = currentClue.answer
+            currentPointValue = 40
+            questions.textContent = currentClue.question
+            questionsCard.style.display="block"
+            outcomebox.style.display = "none";
+            categoryGrid.style.display="none";
+            authorQuestion3.style.visibility="hidden";
+        }
+        function authorQ4(){
+            currentClue = setAuthorQ.clues[4];
+            console.log(currentClue);
+            answer = currentClue.answer
+            currentPointValue = 50
+            questions.textContent = currentClue.question
+            questionsCard.style.display="block"
+            outcomebox.style.display = "none";
+            categoryGrid.style.display="none";
+            authorQuestion4.style.visibility="hidden";
+        }
+
+        function checkAnswer(){
+            const CurrAnswer = answerForCurrClue.value;
+            if(CurrAnswer == answer){
+                currentScore = currentScore + currentPointValue;
+                scoreText.textContent = currentScore;
+                answerForCurrClue.value = '';
+                results.textContent = "Answer is correct!";
+                outcomebox.style.display = "block";
+                categoryGrid.style.display="grid";
+                questionsCard.style.display="none";
+            }
+            else{
+                results.textContent = "Answer is incorrect, correct answer is: " + answer;
+                outcomebox.style.display = "block";
+                categoryGrid.style.display="grid";
+                questionsCard.style.display="none";
+            }
+        }
+
+        
+    </script>
+  </body>
+</html>
